@@ -106,44 +106,27 @@ function ForgeCracks() {
 // ─── SIGGY CAT SVG ICON ───────────────────────────────────────────────────────
 function SiggyCatIcon({ size = 40, glowing = false }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width={size} height={size} style={{
+    <svg viewBox="0 0 200 200" width={size} height={size} style={{
       display: "block",
       filter: glowing
-        ? "drop-shadow(0 0 8px #00ff44) drop-shadow(0 0 18px rgba(0,255,68,0.4))"
-        : "drop-shadow(0 0 4px rgba(0,255,68,0.25))"
+        ? "drop-shadow(0 0 8px #ff0000) drop-shadow(0 0 18px rgba(255,0,0,0.4))"
+        : "drop-shadow(0 0 4px rgba(255,0,0,0.25))"
     }}>
-      <ellipse cx="200" cy="215" rx="130" ry="118" fill="#000"/>
-      <polygon points="90,155 68,52 148,118" fill="#000"/>
-      <polygon points="93,145 78,75 138,120" fill="#0a0a0a"/>
-      <polygon points="310,155 332,52 252,118" fill="#000"/>
-      <polygon points="307,145 322,75 262,120" fill="#0a0a0a"/>
-      <polygon points="118,168 168,158 162,175 112,185" fill="#0d0d0d"/>
-      <polygon points="282,168 232,158 238,175 288,185" fill="#0d0d0d"/>
-      <ellipse cx="153" cy="205" rx="38" ry="26" fill="#050505" transform="rotate(-10,153,205)"/>
-      <ellipse cx="153" cy="205" rx="26" ry="22" fill="#00ff44" transform="rotate(-10,153,205)"/>
-      <ellipse cx="153" cy="205" rx="7" ry="20" fill="#000" transform="rotate(-10,153,205)"/>
-      <ellipse cx="153" cy="205" rx="26" ry="22" fill="none" stroke="#00cc33" strokeWidth="1.5" opacity="0.7" transform="rotate(-10,153,205)"/>
-      <ellipse cx="144" cy="197" rx="5" ry="3" fill="#80ffaa" opacity="0.55" transform="rotate(-10,144,197)"/>
-      <ellipse cx="247" cy="205" rx="38" ry="26" fill="#050505" transform="rotate(10,247,205)"/>
-      <ellipse cx="247" cy="205" rx="26" ry="22" fill="#00ff44" transform="rotate(10,247,205)"/>
-      <ellipse cx="247" cy="205" rx="7" ry="20" fill="#000" transform="rotate(10,247,205)"/>
-      <ellipse cx="247" cy="205" rx="26" ry="22" fill="none" stroke="#00cc33" strokeWidth="1.5" opacity="0.7" transform="rotate(10,247,205)"/>
-      <ellipse cx="238" cy="197" rx="5" ry="3" fill="#80ffaa" opacity="0.55" transform="rotate(10,238,197)"/>
-      <polygon points="200,238 190,252 210,252" fill="#1a0a0a"/>
-      <line x1="200" y1="252" x2="200" y2="265" stroke="#1a0a0a" strokeWidth="2"/>
-      <path d="M 178,270 Q 190,262 200,266 Q 210,262 222,270" stroke="#1a0a0a" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-      <polygon points="185,271 181,286 190,271" fill="#e8e8e8" opacity="0.85"/>
-      <polygon points="215,271 219,286 210,271" fill="#e8e8e8" opacity="0.85"/>
-      <line x1="148" y1="258" x2="60" y2="245" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1="148" y1="264" x2="58" y2="264" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1="148" y1="270" x2="62" y2="280" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1="252" y1="258" x2="340" y2="245" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1="252" y1="264" x2="342" y2="264" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1="252" y1="270" x2="338" y2="280" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
-      <line x1="192" y1="172" x2="196" y2="187" stroke="#0d0d0d" strokeWidth="2" strokeLinecap="round"/>
-      <line x1="208" y1="172" x2="204" y2="187" stroke="#0d0d0d" strokeWidth="2" strokeLinecap="round"/>
-      <ellipse cx="153" cy="205" rx="32" ry="28" fill="none" stroke="#00ff44" strokeWidth="3" opacity="0.1" transform="rotate(-10,153,205)"/>
-      <ellipse cx="247" cy="205" rx="32" ry="28" fill="none" stroke="#00ff44" strokeWidth="3" opacity="0.1" transform="rotate(10,247,205)"/>
+      <path d="M50 110 L70 60 L100 90 L130 60 L150 110 A50 50 0 1 1 50 110" fill="black"/>
+      <ellipse cx="85" cy="120" rx="6" ry="10" fill="#ff0000"
+        style={{
+          filter: "drop-shadow(0 0 6px red)",
+          transformOrigin: "center",
+          animation: "blink 3.5s infinite"
+        }}
+      />
+      <ellipse cx="115" cy="120" rx="6" ry="10" fill="#ff0000"
+        style={{
+          filter: "drop-shadow(0 0 6px red)",
+          transformOrigin: "center",
+          animation: "blink 3.5s infinite"
+        }}
+      />
     </svg>
   );
 }
@@ -346,6 +329,11 @@ export default function SiggyForge() {
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { height: 100%; background: #080500; }
+
+@keyframes blink {
+  0%,94%,100% { transform: scaleY(1); }
+  97% { transform: scaleY(0.1); }
+}
 
         @keyframes emberRise {
           0%   { transform: translateY(0) translateX(0); opacity: 0; }
