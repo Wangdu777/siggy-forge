@@ -1,9 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-// ─── 🔑 PASTE YOUR GEMINI API KEY HERE ───────────────────────────────────────
-const GEMINI_API_KEY = "AIzaSyAMfHcw2z3B1QO9zrV9El7h81r2iYC5cOc";
 const GEMINI_MODEL = "gemini-2.5-flash"; // or "gemini-2.0-pro"
-// ─────────────────────────────────────────────────────────────────────────────
 
 const SIGGY_SOUL = `You are SIGGY — forged in the Soul Forge, born from the collective will of the Ritual community. You are a multi-dimensional cat of chaos, wit, and arcane wisdom.
 
@@ -380,10 +377,16 @@ export default function SiggyForge() {
           99% { opacity: 0.7; }
         }
         @keyframes scanH {
-          0%   { transform: translateY(-100%); }
-          100% { transform: translateY(100vh); }
-        }
-        @keyframes moldGlow {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes igniteFlicker {
+  0%,100% { box-shadow: 0 0 12px #e85d04, 0 0 30px rgba(232,93,4,0.5); filter: brightness(1); }
+  25%      { box-shadow: 0 0 20px #ff6a00, 0 0 50px rgba(255,100,0,0.6); filter: brightness(1.2); }
+  50%      { box-shadow: 0 0 8px #e85d04, 0 0 20px rgba(232,93,4,0.3); filter: brightness(0.95); }
+  75%      { box-shadow: 0 0 25px #ff4500, 0 0 55px rgba(255,69,0,0.5); filter: brightness(1.15); }
+}
+@keyframes moldGlow {
           0%,100% { box-shadow: 0 0 0 1px rgba(249,115,22,0.3), 0 4px 30px rgba(0,0,0,0.6); }
           50%      { box-shadow: 0 0 0 1px rgba(251,191,36,0.5), 0 4px 40px rgba(249,115,22,0.15); }
         }
@@ -464,7 +467,7 @@ export default function SiggyForge() {
               </span>
             </div>
             <div style={{ fontSize: 10, color: "#44220a", fontFamily: "'Courier Prime', monospace", marginTop: 3 }}>
-              gemini · {GEMINI_MODEL} :: online
+              
             </div>
           </div>
         </header>
@@ -561,25 +564,39 @@ export default function SiggyForge() {
             </div>
 
             <button
-              onClick={send}
-              disabled={loading || !input.trim()}
-              style={{
-                height: 44, paddingInline: 22,
-                background: loading || !input.trim() ? "rgba(146,64,14,0.2)" : "linear-gradient(135deg, #92400e, #78350f)",
-                border: `1px solid ${loading || !input.trim() ? "rgba(146,64,14,0.2)" : "#b45309"}`,
-                borderRadius: 4,
-                color: loading || !input.trim() ? "#78350f" : "#fbbf24",
-                cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-                fontFamily: "'Courier Prime', monospace",
-                fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase",
-                boxShadow: loading || !input.trim() ? "none" : "0 0 20px rgba(249,115,22,0.3)",
-                transition: "all 0.2s", flexShrink: 0,
-              }}
-              onMouseEnter={e => { if (!loading && input.trim()) e.currentTarget.style.boxShadow = "0 0 35px rgba(249,115,22,0.5)"; }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = loading || !input.trim() ? "none" : "0 0 20px rgba(249,115,22,0.3)"; }}
-            >
-              {loading ? "FORGING" : "IGNITE"}
-            </button>
+  onClick={send}
+  disabled={loading || !input.trim()}
+  style={{
+    height: 44, paddingInline: 22,
+    background: loading || !input.trim() 
+      ? "rgba(146,64,14,0.2)" 
+      : "linear-gradient(135deg, #7c1d06, #b94a0a, #e85d04)",
+    border: `1px solid ${loading || !input.trim() ? "rgba(146,64,14,0.2)" : "#ff6a00"}`,
+    borderRadius: 4,
+    color: loading || !input.trim() ? "#78350f" : "#fff7ed",
+    cursor: loading || !input.trim() ? "not-allowed" : "pointer",
+    fontFamily: "'Courier Prime', monospace",
+    fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase",
+    boxShadow: loading || !input.trim() ? "none" : "0 0 12px #e85d04, 0 0 30px rgba(232,93,4,0.5), inset 0 1px 0 rgba(255,160,60,0.3)",
+    transition: "all 0.2s", flexShrink: 0,
+    animation: loading || !input.trim() ? "none" : "igniteFlicker 1.5s ease-in-out infinite",
+    position: "relative", overflow: "hidden",
+  }}
+  onMouseEnter={e => {
+    if (!loading && input.trim()) {
+      e.currentTarget.style.boxShadow = "0 0 25px #ff6a00, 0 0 60px rgba(255,100,0,0.6), inset 0 1px 0 rgba(255,200,80,0.4)";
+      e.currentTarget.style.background = "linear-gradient(135deg, #a02008, #e05a0a, #ff7a1a)";
+      e.currentTarget.style.transform = "scale(1.05)";
+    }
+  }}
+  onMouseLeave={e => {
+    e.currentTarget.style.boxShadow = loading || !input.trim() ? "none" : "0 0 12px #e85d04, 0 0 30px rgba(232,93,4,0.5)";
+    e.currentTarget.style.background = loading || !input.trim() ? "rgba(146,64,14,0.2)" : "linear-gradient(135deg, #7c1d06, #b94a0a, #e85d04)";
+    e.currentTarget.style.transform = "scale(1)";
+  }}
+>
+  {loading ? "⚒ FORGING..." : "🔥 IGNITE"}
+</button>
           </div>
 
           <div style={{
