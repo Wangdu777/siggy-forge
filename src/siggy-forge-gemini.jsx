@@ -37,7 +37,8 @@ async function callGemini(messages) {
   const contents = messages.map(m => ({
     role: m.role === "assistant" ? "model" : "user",
     parts: [{ text: m.content }],
-  }));const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+ }));
+  const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
     {
