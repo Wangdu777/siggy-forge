@@ -312,10 +312,6 @@ export default function SiggyForge() {
     const text = input.trim();
     if (!text || loading) return;
 
-    if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-      setError("Please replace YOUR_GEMINI_API_KEY_HERE at the top of the file with your real Gemini API key.");
-      return;
-    }
 
     const next = [...messages, { role: "user", content: text }];
     setMessages(next);
