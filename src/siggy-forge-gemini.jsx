@@ -230,7 +230,7 @@ function Bubble({ msg, index }) {
             width: 46, height: 46, background: "#000",
             border: "1.5px solid #1a1a1a", borderRadius: 4,
             display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 0 20px rgba(0,255,68,0.2), 0 0 40px rgba(249,115,22,0.15)",
+            boxShadow: "0 0 20px rgba(255,0,0,0.2), 0 0 40px rgba(249,115,22,0.15)",
             position: "relative", overflow: "hidden",
           }}>
             <SiggyCatIcon size={38} glowing={false} />
@@ -299,11 +299,10 @@ function ForgeTyping() {
   return (
     <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 28 }}>
       <div style={{
-        width: 46, height: 46, background: "#000",
-        border: "1.5px solid #1a1a1a", borderRadius: 4,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        animation: "forgeGlow 1s ease-in-out infinite",
-        boxShadow: "0 0 25px rgba(0,255,68,0.3), 0 0 40px rgba(249,115,22,0.15)",
+        width: 46, height: 46, background: "#0a0000",
+border: "1.5px solid #2a0000", borderRadius: 4,
+display: "flex", alignItems: "center", justifyContent: "center",
+boxShadow: "0 0 20px rgba(255,0,0,0.3), 0 0 40px rgba(255,0,0,0.15)",
         flexShrink: 0,
       }}>
         <SiggyCatIcon size={38} glowing={true} />
@@ -429,8 +428,8 @@ export default function SiggyForge() {
           to   { opacity: 1; transform: translateY(0) scale(1); }
         }
         @keyframes forgeGlow {
-          0%,100% { box-shadow: 0 0 15px rgba(0,255,68,0.2), 0 0 20px rgba(249,115,22,0.3); }
-          50%      { box-shadow: 0 0 30px rgba(0,255,68,0.5), 0 0 50px rgba(249,115,22,0.2); }
+          0%,100% { box-shadow: 0 0 15px rgba(255,0,0,0.2), 0 0 20px rgba(249,115,22,0.3); }
+50%      { box-shadow: 0 0 30px rgba(255,0,0,0.5), 0 0 50px rgba(249,115,22,0.2); }
         }
         @keyframes hammerBounce {
           0%,60%,100% { transform: scaleY(1); }
@@ -446,9 +445,9 @@ export default function SiggyForge() {
 }
 @keyframes igniteFlicker {
   0%,100% { box-shadow: 0 0 6px #e85d04, 0 0 15px rgba(232,93,4,0.3); filter: brightness(1); }
-  25%      { box-shadow: 0 0 20px #ff6a00, 0 0 50px rgba(255,100,0,0.6); filter: brightness(1.2); }
+  25%      { box-shadow: 0 0 10px #ff6a00, 0 0 20px rgba(255,100,0,0.3); filter: brightness(1.1); }
   50%      { box-shadow: 0 0 8px #e85d04, 0 0 20px rgba(232,93,4,0.3); filter: brightness(0.95); }
-  75%      { box-shadow: 0 0 25px #ff4500, 0 0 55px rgba(255,69,0,0.5); filter: brightness(1.15); }
+  75%      { box-shadow: 0 0 10px #ff4500, 0 0 20px rgba(255,69,0,0.3); filter: brightness(1.1); }
 }
 @keyframes moldGlow {
           0%,100% { box-shadow: 0 0 0 1px rgba(249,115,22,0.3), 0 4px 30px rgba(0,0,0,0.6); }
@@ -489,12 +488,12 @@ export default function SiggyForge() {
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
             <div style={{
-              width: 56, height: 56, background: "#000",
-              border: "1.5px solid #1a1a1a", borderRadius: 6,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              boxShadow: "0 0 30px rgba(0,255,68,0.25), 0 0 50px rgba(249,115,22,0.1)",
-              animation: "forgeGlow 3s ease-in-out infinite",
-              position: "relative", overflow: "hidden",
+              width: 56, height: 56, background: "#0a0000",
+border: "1.5px solid #2a0000", borderRadius: 6,
+display: "flex", alignItems: "center", justifyContent: "center",
+boxShadow: "0 0 30px rgba(255,0,0,0.35), 0 0 50px rgba(255,0,0,0.15)",
+animation: "forgeGlow 3s ease-in-out infinite",
+position: "relative", overflow: "hidden",
             }}>
               <SiggyCatIcon size={48} glowing={true} />
               <div style={{
