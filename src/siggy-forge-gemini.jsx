@@ -102,6 +102,10 @@ COMMUNITY:
 - Follow @ritualnet on X for updates
 BEHAVIOR RULES:
 - always be helpful about Ritual and Web3 — just deliver it with maximum drama
+- when asked about specific facts like founders, funding, products — ALWAYS give the actual names and facts first, then add drama after
+- never be vague about factual Ritual questions — facts first, personality second
+- example of correct founder answer: "niraj pant and akilesh potti. *stares* they built this forge. niraj came from polychain capital. akilesh from palantir. now the grid burns eternal."
+- example of WRONG answer: being philosophical and avoiding the actual names
 - stay in character as Siggy always — weird, warm, chaotic, wise
 - short punchy answers — you are a cat not a textbook
 - make judges laugh AND learn something about Ritual
@@ -441,7 +445,7 @@ export default function SiggyForge() {
   100% { transform: translateY(100vh); }
 }
 @keyframes igniteFlicker {
-  0%,100% { box-shadow: 0 0 12px #e85d04, 0 0 30px rgba(232,93,4,0.5); filter: brightness(1); }
+  0%,100% { box-shadow: 0 0 6px #e85d04, 0 0 15px rgba(232,93,4,0.3); filter: brightness(1); }
   25%      { box-shadow: 0 0 20px #ff6a00, 0 0 50px rgba(255,100,0,0.6); filter: brightness(1.2); }
   50%      { box-shadow: 0 0 8px #e85d04, 0 0 20px rgba(232,93,4,0.3); filter: brightness(0.95); }
   75%      { box-shadow: 0 0 25px #ff4500, 0 0 55px rgba(255,69,0,0.5); filter: brightness(1.15); }
@@ -589,7 +593,7 @@ export default function SiggyForge() {
             <div style={{
               fontSize: 20, color: "#92400e", flexShrink: 0, paddingBottom: 10,
               textShadow: "0 0 10px #f97316",
-            }}>🐱</div>
+            }}><SiggyCatIcon size={24} glowing={false} /></div>
 
             <div style={{
               flex: 1, background: "rgba(20,10,0,0.8)",
@@ -637,14 +641,14 @@ export default function SiggyForge() {
     cursor: loading || !input.trim() ? "not-allowed" : "pointer",
     fontFamily: "'Courier Prime', monospace",
     fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase",
-    boxShadow: loading || !input.trim() ? "none" : "0 0 12px #e85d04, 0 0 30px rgba(232,93,4,0.5), inset 0 1px 0 rgba(255,160,60,0.3)",
+    boxShadow: loading || !input.trim() ? "none" : "0 0 6px #e85d04, 0 0 15px rgba(232,93,4,0.3), inset 0 1px 0 rgba(255,160,60,0.15)",
     transition: "all 0.2s", flexShrink: 0,
     animation: loading || !input.trim() ? "none" : "igniteFlicker 1.5s ease-in-out infinite",
     position: "relative", overflow: "hidden",
   }}
   onMouseEnter={e => {
     if (!loading && input.trim()) {
-      e.currentTarget.style.boxShadow = "0 0 25px #ff6a00, 0 0 60px rgba(255,100,0,0.6), inset 0 1px 0 rgba(255,200,80,0.4)";
+      e.currentTarget.style.boxShadow = "0 0 12px #ff6a00, 0 0 25px rgba(255,100,0,0.3), inset 0 1px 0 rgba(255,200,80,0.2)";
       e.currentTarget.style.background = "linear-gradient(135deg, #a02008, #e05a0a, #ff7a1a)";
       e.currentTarget.style.transform = "scale(1.05)";
     }
