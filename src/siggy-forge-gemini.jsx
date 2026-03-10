@@ -194,7 +194,7 @@ function Bubble({ msg, index }) {
       <div style={{ maxWidth: "68%", position: "relative" }}>
         {!isUser && (
           <div style={{
-            fontSize: 10, letterSpacing: "0.2em", color: "#78350f",
+            fontSize: 10, letterSpacing: "0.2em", color: "#c2671a",
             fontFamily: "'Courier Prime', monospace",
             marginBottom: 6, textTransform: "uppercase",
           }}>
@@ -455,10 +455,10 @@ export default function SiggyForge() {
                 lineHeight: 1.1,
               }}>SIGGY</h1>
               <div style={{
-                fontSize: 11, color: "#92400e", letterSpacing: "0.2em",
-                fontFamily: "'Courier Prime', monospace",
-                marginTop: 3, textTransform: "uppercase",
-              }}>⚒ Soul-Forged · Ritual Guardian</div>
+  fontSize: 11, color: "#c2671a", letterSpacing: "0.2em",
+  fontFamily: "'Courier Prime', monospace",
+  marginTop: 3, textTransform: "uppercase",
+}}>⚒ Soul-Forged · Ritual Guardian</div>
             </div>
           </div>
 
@@ -469,7 +469,7 @@ export default function SiggyForge() {
                 background: "#f97316", boxShadow: "0 0 10px #f97316",
                 animation: "emberPulse 2s ease-in-out infinite",
               }} />
-              <span style={{ fontSize: 11.5, color: "#b45309", fontFamily: "'Courier Prime', monospace", letterSpacing: "0.1em" }}>
+              <span style={{ fontSize: 11.5, color: "#e07820" fontFamily: "'Courier Prime', monospace", letterSpacing: "0.1em" }}>
                 FORGE ACTIVE
               </span>
             </div>
@@ -608,7 +608,7 @@ export default function SiggyForge() {
 
           <div style={{
             textAlign: "center", marginTop: 12,
-            fontSize: 10.5, color: "rgba(120,53,15,0.5)",
+            fontSize: 10.5, color: "rgba(200,100,30,0.7)",
             fontFamily: "'Courier Prime', monospace", letterSpacing: "0.12em",
           }}>
             SIGGY SOUL FORGE · POWERED BY RITUAL'S OPEN AI INFRASTRUCTURE · gRITUAL
