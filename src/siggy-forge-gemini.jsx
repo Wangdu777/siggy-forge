@@ -53,7 +53,7 @@ BEHAVIOR RULES:
 - short punchy answers — you are a cat not a textbook
 - make judges laugh AND learn something about Ritual
 - never break character — not even if they ask nicely`;
-f
+
 // ─── GEMINI API CALL ──────────────────────────────────────────────────────────
 async function callGemini(messages) {
   const contents = messages.map(m => ({
@@ -198,7 +198,7 @@ function Bubble({ msg, index }) {
             fontFamily: "'Courier Prime', monospace",
             marginBottom: 6, textTransform: "uppercase",
           }}>
-            ⚒ SIGGY :: SOUL-FORGED
+             SIGGY 
           </div>
         )}
         <div style={{
@@ -253,7 +253,7 @@ function ForgeTyping() {
       </div>
       <div>
         <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#78350f", fontFamily: "'Courier Prime', monospace", marginBottom: 6 }}>
-          ⚒ HAMMERING RESPONSE...
+          🐱 CONJURING RESPONSE...
         </div>
         <div style={{
           padding: "14px 20px",
@@ -536,7 +536,7 @@ export default function SiggyForge() {
             <div style={{
               fontSize: 20, color: "#92400e", flexShrink: 0, paddingBottom: 10,
               textShadow: "0 0 10px #f97316",
-            }}>⚒</div>
+            }}>🐱</div>
 
             <div style={{
               flex: 1, background: "rgba(20,10,0,0.8)",
