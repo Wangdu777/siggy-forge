@@ -140,7 +140,7 @@ function chunkDocs(raw) {
 const DOC_CHUNKS = chunkDocs(RITUAL_DOCS_RAW)
 
 // ─── RAG: EMBED via Google Embedding API ─────────────────────────────────────
-const EMBED_MODEL = 'embedding-001'
+const EMBED_MODEL = 'text-embedding-004'
 const GEMINI_KEY = () => process.env.GEMINI_API_KEY
 
 async function embedText(text) {
