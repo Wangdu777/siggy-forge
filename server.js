@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
-dotenv.config({ path: 'C:\\Users\\USER\\Desktop\\ritual forge gemini\\siggy-forge\\.env' })
+dotenv.config()
 console.log('KEY CHECK:', process.env.GEMINI_API_KEY?.substring(0, 15))
 
 
