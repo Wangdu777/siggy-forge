@@ -145,12 +145,11 @@ const GEMINI_KEY = () => process.env.GEMINI_API_KEY
 
 async function embedText(text) {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${EMBED_MODEL}:embedContent?key=${GEMINI_KEY()}`,
+    `https://generativelanguage.googleapis.com/v1/models/${EMBED_MODEL}:embedContent?key=${GEMINI_KEY()}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: `models/${EMBED_MODEL}`,
         content: { parts: [{ text }] }
       })
     }
@@ -266,3 +265,5 @@ app.listen(PORT, () => {
   console.log(`🔥 Siggy Soul Forge live on port ${PORT}`)
   buildIndex().catch(console.error)
 })
+
+
