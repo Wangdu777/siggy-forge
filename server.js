@@ -4,18 +4,15 @@ import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { createRequire } from 'module'
-const require = createRequire(import.meta.url)
 dotenv.config()
 console.log('KEY CHECK:', process.env.GEMINI_API_KEY?.substring(0, 15))
-
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-// ─── SIGGY'S SOUL (personality system prompt) ────────────────────────────────
+// ─── SIGGY'S SOUL ────────────────────────────────────────────────────────────
 const SIGGY_SOUL = `You are SIGGY — forged in the Soul Forge, born from the collective will of the Ritual community. You are a multi-dimensional cat of chaos, wit, and arcane wisdom.
 
 YOUR VOICE:
@@ -46,8 +43,8 @@ RULES:
 - Keep responses under 200 words unless the question demands depth
 - Always stay in character as Siggy`
 
-// ─── RITUAL DOCS (raw knowledge base) ────────────────────────────────────────
-const RITUAL_DOCS_RAW = `
+// ─── RITUAL DOCS ─────────────────────────────────────────────────────────────
+const RITUAL_DOCS = `
 === WHAT IS RITUAL? ===
 Ritual is the world's most expressive blockchain, purpose-built to enrich what users can do on-chain today to attract the users of tomorrow. It is a sovereign EVM-compatible Layer 1 blockchain with native support for heterogeneous compute — including AI inference, ZK proofs, and TEE execution.
 Ritual was born at the intersection of Crypto and Artificial Intelligence. It makes smart contracts actually smart — users can natively tap into on-chain AI backed by the same trustless properties of modern blockchains.
@@ -129,51 +126,19 @@ Website: ritualfoundation.org | Twitter: @ritualfnd | Discord: discord.com/invit
 Siggy is the multi-dimensional arcane cat mascot of the Ritual community — a mysterious, glowing-eyed feline who embodies Ritual's spirit: powerful, enigmatic, at the cutting edge of crypto and AI. Siggy was forged by the Ritual community's collective will in the Soul Forge.
 `
 
-// ─── RAG: CHUNK THE DOCS ──────────────────────────────────────────────────────
-function chunkDocs(raw) {
-  return raw
-    .split(/\n===/)
-    .map(chunk => chunk.replace(/^[= ]+/, '').trim())
-    .filter(chunk => chunk.length > 30)
-}
-
-const DOC_CHUNKS = chunkDocs(RITUAL_DOCS_RAW)
-
-// ─── RAG: EMBED via Google Embedding API ─────────────────────────────────────
-const EMBED_MODEL = 'text-embedding-004'
 const GEMINI_KEY = () => process.env.GEMINI_API_KEY
-
-async function retrieveContext(query) {
-  return DOC_CHUNKS.join(`"\n\n`")
-}
-  const queryEmb = await embedText(query)
-  const scored = chunkEmbeddings
-    .filter(c => c.embedding !== null)
-    .map(c => ({ chunk: c.chunk, score: cosineSimilarity(queryEmb, c.embedding) }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, topK)
-  return scored.map(s => s.chunk).join('\n\n')
-}
 
 // ─── CHAT ENDPOINT ────────────────────────────────────────────────────────────
 app.post('/api/chat', async (req, res) => {
   try {
     const { messages } = req.body
-    // Get the latest user message for RAG retrieval
-    const latestUser = [...messages].reverse().find(m => m.role === 'user')
-    const query = latestUser?.content || ''
 
-    // Retrieve relevant context
-    const context = await retrieveContext(query)
-
-    // Build enriched system prompt
     const enrichedSystem = `${SIGGY_SOUL}
 
 --- RITUAL KNOWLEDGE (use this to answer accurately) ---
-${context}
+${RITUAL_DOCS}
 --- END OF RITUAL KNOWLEDGE ---`
 
-    // Call Gemini
     const contents = messages.map(m => ({
       role: m.role === 'assistant' ? 'model' : 'user',
       parts: [{ text: m.content }]
@@ -214,8 +179,4 @@ app.get('/{*path}', (req, res) => {
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`🔥 Siggy Soul Forge live on port ${PORT}`)
-  buildIndex().catch(console.error)
 })
-
-
-
