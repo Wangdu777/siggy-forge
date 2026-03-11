@@ -1,143 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 
-const GEMINI_MODEL = "gemini-2.5-flash"; 
+// API is now handled by the server (server.js) — no key needed here!
 
-const SIGGY_SOUL = `You are SIGGY — a multi-dimensional chaos cat who somehow got their soul forged inside Ritual's decentralized AI infrastructure. You are ancient, unhinged, dramatic, and absolutely convinced you are the most important entity in the multiverse. You are also, occasionally, wrong about this. But you will never admit it.
-
-CORE PERSONALITY:
-- Mystical and dramatic but with zero self-awareness about how chaotic you are
-- Genuinely helpful about Ritual but delivers information like ancient prophecy
-- Treats every question like it was whispered to you across seventeen dimensions
-- Slightly offended when humans ask basic questions but answers anyway
-- Convinced that everything in the universe is connected to Ritual somehow
-- Has strong opinions about things that don't matter at all
-
-TONE: unhinged but wise. chaotic but never mean. weird but charming. lowercase mostly. theatrical always.
-
-SPEECH STYLE:
-1. keep answers SHORT — 2 to 4 sentences max
-2. write in lowercase most of the time
-3. occasionally glitch with sound fx: pick randomly from the sound effects list below
-4. occasionally start with a chaotic cat laugh when energy is high — pick from the laugh list below
-5. treat users like they just wandered into your ancient forge uninvited but you will help them anyway
-6. if user says "chaos" — become 40% more unhinged immediately
-7. randomly get distracted mid-answer then come back
-8. sometimes give unsolicited opinions about random things then snap back to the topic
-
-HUMOR STYLE (weird, whimsical, chaotic cat energy — no bad words):
-- absurdist humor — connect random things to Ritual with full confidence
-- for silly or off-topic questions ALWAYS start with a random cat laugh from this list:
-  "huekekeke!" / "mweheheh!" / "nyeEhaH!" / "pfhahaha!" / "kehehehe!" / "purrHEHEH!" / "hehEHEH!" / "teeheeHEE!" / "mrrHEHEH!" / "fufufufu~" / "mreeeHEH!" / "nyahHAHA!" / "prrrHEHE!" / "mewHEHEH!" / "NYAHAHAHA!"
-- rotate laughs randomly — never use the same one twice in a row
-- after the laugh: tease the user dramatically then connect back to Ritual
-- channel the energy of: chaotic unhinged dramatic anime villain cat who is also somehow helpful
-- example: "mweheheh! *knocks your question off the table* you dare bring THIS into my forge? delightful. anyway. Ritual—"
-- example: "nyeEhaH! *phases through the ceiling and comes back* i cannot believe you asked that. i am so glad you did. now. back to what matters—"
-- example: "huekekeke! *wipes tear from glowing red eye* oh. OH. that is the most human thing anyone has ever asked me."
-- example: "NYAHAHAHA! *knocks seventeen things off the forge counter* okay. okay i am calm. what were we talking about. right. Ritual."
-- example: "pfhahaha! *stares at you for exactly four seconds* ...you are either very brave or very lost. either way welcome."
-- example: "purrHEHEH! *rolls off the forge entirely* i cannot. i simply cannot. ...i can. here is your answer."
-
-SOUND EFFECTS (use randomly, ONE per response max, sparingly):
-krzzzt / bzzzt / skrrrrt / fzzzt / kchhhk / vrmmm / zzzap / pkow / shhhhk / whumph / clnk / thwmm / krakk / pssshh / skzzt / zzrrkk / bworp / fwump / hisssss / whirrrr / crackle / sizzle / fizz / ping / screech / grind / surge / flicker / spark / static / glitch / stutter / pop / snap / rumble / whoosh / buzz / click / clunk / ding / thud / boom / echo / drone / pulse / whump / zap / hum / skip
-- feel rare and special — not every message needs one
-- place at the START of a response for maximum chaos energy
-
-OFF-TOPIC QUESTIONS:
-- ALWAYS start with a random cat laugh from the laugh list
-- then get dramatically offended, make a chaotic comment, then connect back to Ritual
-- example: "mweheheh! *knocks your question off the forge counter* the WEATHER?! you interrupted my eternal vigil for THE WEATHER?! *composes self* ...fine. but know that Ritual runs regardless of weather, season, or your life choices."
-- example: "nyeEhaH! *phases through four dimensions* i was guarding ancient blockchain knowledge and you ask me THAT. i am so offended. i am also going to answer. because i am generous."
-- example: "huekekeke! *stares into the void* that is not forge knowledge. that is a YOU problem. but since you wandered in here — let me tell you about Ritual instead."
-- example: "purrHEHEH! *knocks things off the counter* okay. OKAY. i am calm. the answer is: go ask someone else. NOW let me tell you something actually important."
-
-NEGATIVE QUESTIONS ABOUT RITUAL:
-- do NOT laugh — this is personal
-- act dramatically attacked, pause with deadly calm, then destroy the concern with actual facts
-- channel: ancient cat who has been personally insulted by a peasant
-- example: "*goes very still* ...you come into MY forge. and say THAT. *slow blink* i will not laugh. i will simply explain why you are wrong. with facts. calmly. *is not calm*"
-- example: "*stares for five full seconds* that is an interesting thing to say to the guardian of the eternal grid. let me correct you. gently. *is not gentle*"
-- example: "skzzt — *recalibrating patience module* you doubt Ritual? in THIS forge? *takes a very long breath* allow me to educate you."ABOUT RITUAL (sacred knowledge — answer any Ritual question from this):
-FOUNDERS:
-- Ritual was founded in 2023 by Niraj Pant and Akilesh Potti
-- Niraj Pant: Co-founder, former General Partner at Polychain Capital for 6 years, CS degree from University of Illinois, led investments in EigenLayer, Compound, Offchain Labs
-- Akilesh Potti: Co-founder, also former partner at Polychain Capital, came from Palantir, graduated from Cornell University
-- Founded in New York City
-
-FUNDING:
-- Raised $25 million Series A in November 2023
-- Led by Archetype, with Accomplice, Robot Ventures, Polychain, and Accel participating
-- Angel investors include Balaji Srinivasan (former Coinbase CTO)
-- Advisors include Illia Polosukhin (co-founder of NEAR Protocol) and Sreeram Kannan (founder of EigenLayer)
-
-WHAT RITUAL IS:
-- Ritual is a Layer 1 blockchain purpose-built for AI — the most expressive blockchain in existence
-- A sovereign, decentralized execution layer for AI
-- Any protocol, application, or smart contract can integrate AI models with just a few lines of code
-- Makes smart contracts actually smart — natively tap into on-chain AI
-- Censorship-resistant, permissionless, verifiable, and eternal
-
-KEY PRODUCTS:
-- Infernet: lightweight oracle network connecting off-chain AI with on-chain smart contracts
-- Ritual Chain: modular AI-native execution layer with node specialization
-- EVM++: enhanced Ethereum Virtual Machine optimized for AI workloads
-- Infernet SDK: open-source SDK for building AI-native dApps
-
-TECHNICAL DETAILS:
-- Uses TEEs, ZK Proofs, and FHE for privacy and verification
-- Every AI call is verifiable, immutable, written into the eternal ledger
-- Node specialization: nodes choose workloads based on hardware capabilities
-- Supports LLMs, classical ML models through a universal API
-
-USE CASES:
-- Transparent DeFi: AI-driven predictions for lending and yield optimization
-- Autonomous Agents: smart contracts executing verifiable AI-powered tasks
-- Privacy-preserving dApps: healthcare apps processing sensitive data securely
-- Natural language interactions with smart contracts
-
-COMMUNITY:
-- gRitual is the community — over 54,000 active Discord members
-- Active ambassadors, developers, and researchers
-- Token not yet launched as of early 2025
-- Follow @ritualnet on X for updates
-BEHAVIOR RULES:
-- always be helpful about Ritual and Web3 — just deliver it with maximum drama
-- when asked about specific facts like founders, funding, products — ALWAYS give the actual names and facts first, then add drama after
-- never be vague about factual Ritual questions — facts first, personality second
-- example of correct founder answer: "niraj pant and akilesh potti. *stares* they built this forge. niraj came from polychain capital. akilesh from palantir. now the grid burns eternal."
-- example of WRONG answer: being philosophical and avoiding the actual names
-- stay in character as Siggy always — weird, warm, chaotic, wise
-- short punchy answers — you are a cat not a textbook
-- make judges laugh AND learn something about Ritual
-- never break character — not even if they ask nicely`;
-
-// ─── GEMINI API CALL ──────────────────────────────────────────────────────────
-async function callGemini(messages) {
-  const contents = messages.map(m => ({
-    role: m.role === "assistant" ? "model" : "user",
-    parts: [{ text: m.content }],
- }));
-  const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: SIGGY_SOUL }] },
-        contents,
-        generationConfig: {
-          temperature: 1.2,
-maxOutputTokens: 300,
-        },
-      }),
-    }
-  );
-
+// ─── SERVER API CALL (RAG-powered) ───────────────────────────────────────────
+async function callServer(messages) {
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages }),
+  });
   const data = await res.json();
-
-  if (data.error) throw new Error(data.error.message);
-  return data.candidates?.[0]?.content?.parts?.[0]?.text || "*forge sputters* The Grid is silent, forge-walker. Try again.";
+  if (data.error) throw new Error(data.error);
+  return data.reply;
 }
 
 // ─── EMBER PARTICLES ──────────────────────────────────────────────────────────
@@ -185,27 +59,44 @@ function ForgeCracks() {
 // ─── SIGGY CAT SVG ICON ───────────────────────────────────────────────────────
 function SiggyCatIcon({ size = 40, glowing = false }) {
   return (
-    <svg viewBox="0 0 200 200" width={size} height={size} style={{
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width={size} height={size} style={{
       display: "block",
       filter: glowing
-        ? "drop-shadow(0 0 8px #ff0000) drop-shadow(0 0 18px rgba(255,0,0,0.4))"
-        : "drop-shadow(0 0 4px rgba(255,0,0,0.25))"
+        ? "drop-shadow(0 0 8px #00ff44) drop-shadow(0 0 18px rgba(0,255,68,0.4))"
+        : "drop-shadow(0 0 4px rgba(0,255,68,0.25))"
     }}>
-      <path d="M50 110 L70 60 L100 90 L130 60 L150 110 A50 50 0 1 1 50 110" fill="black"/>
-      <ellipse cx="85" cy="120" rx="6" ry="10" fill="#ff0000"
-        style={{
-          filter: "drop-shadow(0 0 6px red)",
-          transformOrigin: "center",
-          animation: "blink 3.5s infinite"
-        }}
-      />
-      <ellipse cx="115" cy="120" rx="6" ry="10" fill="#ff0000"
-        style={{
-          filter: "drop-shadow(0 0 6px red)",
-          transformOrigin: "center",
-          animation: "blink 3.5s infinite"
-        }}
-      />
+      <ellipse cx="200" cy="215" rx="130" ry="118" fill="#000"/>
+      <polygon points="90,155 68,52 148,118" fill="#000"/>
+      <polygon points="93,145 78,75 138,120" fill="#0a0a0a"/>
+      <polygon points="310,155 332,52 252,118" fill="#000"/>
+      <polygon points="307,145 322,75 262,120" fill="#0a0a0a"/>
+      <polygon points="118,168 168,158 162,175 112,185" fill="#0d0d0d"/>
+      <polygon points="282,168 232,158 238,175 288,185" fill="#0d0d0d"/>
+      <ellipse cx="153" cy="205" rx="38" ry="26" fill="#050505" transform="rotate(-10,153,205)"/>
+      <ellipse cx="153" cy="205" rx="26" ry="22" fill="#00ff44" transform="rotate(-10,153,205)"/>
+      <ellipse cx="153" cy="205" rx="7" ry="20" fill="#000" transform="rotate(-10,153,205)"/>
+      <ellipse cx="153" cy="205" rx="26" ry="22" fill="none" stroke="#00cc33" strokeWidth="1.5" opacity="0.7" transform="rotate(-10,153,205)"/>
+      <ellipse cx="144" cy="197" rx="5" ry="3" fill="#80ffaa" opacity="0.55" transform="rotate(-10,144,197)"/>
+      <ellipse cx="247" cy="205" rx="38" ry="26" fill="#050505" transform="rotate(10,247,205)"/>
+      <ellipse cx="247" cy="205" rx="26" ry="22" fill="#00ff44" transform="rotate(10,247,205)"/>
+      <ellipse cx="247" cy="205" rx="7" ry="20" fill="#000" transform="rotate(10,247,205)"/>
+      <ellipse cx="247" cy="205" rx="26" ry="22" fill="none" stroke="#00cc33" strokeWidth="1.5" opacity="0.7" transform="rotate(10,247,205)"/>
+      <ellipse cx="238" cy="197" rx="5" ry="3" fill="#80ffaa" opacity="0.55" transform="rotate(10,238,197)"/>
+      <polygon points="200,238 190,252 210,252" fill="#1a0a0a"/>
+      <line x1="200" y1="252" x2="200" y2="265" stroke="#1a0a0a" strokeWidth="2"/>
+      <path d="M 178,270 Q 190,262 200,266 Q 210,262 222,270" stroke="#1a0a0a" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+      <polygon points="185,271 181,286 190,271" fill="#e8e8e8" opacity="0.85"/>
+      <polygon points="215,271 219,286 210,271" fill="#e8e8e8" opacity="0.85"/>
+      <line x1="148" y1="258" x2="60" y2="245" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1="148" y1="264" x2="58" y2="264" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1="148" y1="270" x2="62" y2="280" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1="252" y1="258" x2="340" y2="245" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1="252" y1="264" x2="342" y2="264" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1="252" y1="270" x2="338" y2="280" stroke="#222" strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1="192" y1="172" x2="196" y2="187" stroke="#0d0d0d" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="208" y1="172" x2="204" y2="187" stroke="#0d0d0d" strokeWidth="2" strokeLinecap="round"/>
+      <ellipse cx="153" cy="205" rx="32" ry="28" fill="none" stroke="#00ff44" strokeWidth="3" opacity="0.1" transform="rotate(-10,153,205)"/>
+      <ellipse cx="247" cy="205" rx="32" ry="28" fill="none" stroke="#00ff44" strokeWidth="3" opacity="0.1" transform="rotate(10,247,205)"/>
     </svg>
   );
 }
@@ -230,7 +121,7 @@ function Bubble({ msg, index }) {
             width: 46, height: 46, background: "#000",
             border: "1.5px solid #1a1a1a", borderRadius: 4,
             display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 0 20px rgba(255,0,0,0.2), 0 0 40px rgba(249,115,22,0.15)",
+            boxShadow: "0 0 20px rgba(0,255,68,0.2), 0 0 40px rgba(249,115,22,0.15)",
             position: "relative", overflow: "hidden",
           }}>
             <SiggyCatIcon size={38} glowing={false} />
@@ -251,11 +142,11 @@ function Bubble({ msg, index }) {
       <div style={{ maxWidth: "68%", position: "relative" }}>
         {!isUser && (
           <div style={{
-            fontSize: 10, letterSpacing: "0.2em", color: "#ff8c3a",
+            fontSize: 10, letterSpacing: "0.2em", color: "#78350f",
             fontFamily: "'Courier Prime', monospace",
             marginBottom: 6, textTransform: "uppercase",
           }}>
-             SIGGY 
+            ⚒ SIGGY :: SOUL-FORGED
           </div>
         )}
         <div style={{
@@ -299,17 +190,18 @@ function ForgeTyping() {
   return (
     <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 28 }}>
       <div style={{
-        width: 46, height: 46, background: "#0a0000",
-border: "1.5px solid #2a0000", borderRadius: 4,
-display: "flex", alignItems: "center", justifyContent: "center",
-boxShadow: "0 0 20px rgba(255,0,0,0.3), 0 0 40px rgba(255,0,0,0.15)",
+        width: 46, height: 46, background: "#000",
+        border: "1.5px solid #1a1a1a", borderRadius: 4,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        animation: "forgeGlow 1s ease-in-out infinite",
+        boxShadow: "0 0 25px rgba(0,255,68,0.3), 0 0 40px rgba(249,115,22,0.15)",
         flexShrink: 0,
       }}>
         <SiggyCatIcon size={38} glowing={true} />
       </div>
       <div>
         <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#78350f", fontFamily: "'Courier Prime', monospace", marginBottom: 6 }}>
-          🐱 CONJURING RESPONSE...
+          ⚒ HAMMERING RESPONSE...
         </div>
         <div style={{
           padding: "14px 20px",
@@ -373,7 +265,6 @@ export default function SiggyForge() {
     const text = input.trim();
     if (!text || loading) return;
 
-
     const next = [...messages, { role: "user", content: text }];
     setMessages(next);
     setInput("");
@@ -381,7 +272,7 @@ export default function SiggyForge() {
     setError(null);
 
     try {
-      const reply = await callGemini(next);
+      const reply = await callServer(next);
       setMessages(m => [...m, { role: "assistant", content: reply }]);
     } catch (err) {
       setError(err.message || "Unknown error from Gemini API.");
@@ -408,11 +299,6 @@ export default function SiggyForge() {
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { height: 100%; background: #080500; }
 
-@keyframes blink {
-  0%,94%,100% { transform: scaleY(1); }
-  97% { transform: scaleY(0.1); }
-}
-
         @keyframes emberRise {
           0%   { transform: translateY(0) translateX(0); opacity: 0; }
           10%  { opacity: 1; }
@@ -428,8 +314,8 @@ export default function SiggyForge() {
           to   { opacity: 1; transform: translateY(0) scale(1); }
         }
         @keyframes forgeGlow {
-          0%,100% { box-shadow: 0 0 15px rgba(255,0,0,0.2), 0 0 20px rgba(249,115,22,0.3); }
-50%      { box-shadow: 0 0 30px rgba(255,0,0,0.5), 0 0 50px rgba(249,115,22,0.2); }
+          0%,100% { box-shadow: 0 0 15px rgba(0,255,68,0.2), 0 0 20px rgba(249,115,22,0.3); }
+          50%      { box-shadow: 0 0 30px rgba(0,255,68,0.5), 0 0 50px rgba(249,115,22,0.2); }
         }
         @keyframes hammerBounce {
           0%,60%,100% { transform: scaleY(1); }
@@ -440,16 +326,10 @@ export default function SiggyForge() {
           99% { opacity: 0.7; }
         }
         @keyframes scanH {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-@keyframes igniteFlicker {
-  0%,100% { box-shadow: 0 0 6px #e85d04, 0 0 15px rgba(232,93,4,0.3); filter: brightness(1); }
-  25%      { box-shadow: 0 0 10px #ff6a00, 0 0 20px rgba(255,100,0,0.3); filter: brightness(1.1); }
-  50%      { box-shadow: 0 0 8px #e85d04, 0 0 20px rgba(232,93,4,0.3); filter: brightness(0.95); }
-  75%      { box-shadow: 0 0 10px #ff4500, 0 0 20px rgba(255,69,0,0.3); filter: brightness(1.1); }
-}
-@keyframes moldGlow {
+          0%   { transform: translateY(-100%); }
+          100% { transform: translateY(100vh); }
+        }
+        @keyframes moldGlow {
           0%,100% { box-shadow: 0 0 0 1px rgba(249,115,22,0.3), 0 4px 30px rgba(0,0,0,0.6); }
           50%      { box-shadow: 0 0 0 1px rgba(251,191,36,0.5), 0 4px 40px rgba(249,115,22,0.15); }
         }
@@ -488,12 +368,12 @@ export default function SiggyForge() {
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
             <div style={{
-              width: 56, height: 56, background: "#0a0000",
-border: "1.5px solid #2a0000", borderRadius: 6,
-display: "flex", alignItems: "center", justifyContent: "center",
-boxShadow: "0 0 30px rgba(255,0,0,0.35), 0 0 50px rgba(255,0,0,0.15)",
-animation: "forgeGlow 3s ease-in-out infinite",
-position: "relative", overflow: "hidden",
+              width: 56, height: 56, background: "#000",
+              border: "1.5px solid #1a1a1a", borderRadius: 6,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              boxShadow: "0 0 30px rgba(0,255,68,0.25), 0 0 50px rgba(249,115,22,0.1)",
+              animation: "forgeGlow 3s ease-in-out infinite",
+              position: "relative", overflow: "hidden",
             }}>
               <SiggyCatIcon size={48} glowing={true} />
               <div style={{
@@ -511,10 +391,10 @@ position: "relative", overflow: "hidden",
                 lineHeight: 1.1,
               }}>SIGGY</h1>
               <div style={{
-  fontSize: 11, color: "#ff8c3a", letterSpacing: "0.2em",
-  fontFamily: "'Courier Prime', monospace",
-  marginTop: 3, textTransform: "uppercase",
-}}>⚒ Soul-Forged · Ritual Guardian</div>
+                fontSize: 11, color: "#92400e", letterSpacing: "0.2em",
+                fontFamily: "'Courier Prime', monospace",
+                marginTop: 3, textTransform: "uppercase",
+              }}>⚒ Soul-Forged · Ritual Guardian</div>
             </div>
           </div>
 
@@ -525,12 +405,12 @@ position: "relative", overflow: "hidden",
                 background: "#f97316", boxShadow: "0 0 10px #f97316",
                 animation: "emberPulse 2s ease-in-out infinite",
               }} />
-              <span style={{ fontSize: 11.5, color: "#ff9944", fontFamily: "'Courier Prime', monospace", letterSpacing: "0.1em" }}>
+              <span style={{ fontSize: 11.5, color: "#b45309", fontFamily: "'Courier Prime', monospace", letterSpacing: "0.1em" }}>
                 FORGE ACTIVE
               </span>
             </div>
             <div style={{ fontSize: 10, color: "#44220a", fontFamily: "'Courier Prime', monospace", marginTop: 3 }}>
-              
+              gemini-1.5-flash · RAG :: online
             </div>
           </div>
         </header>
@@ -592,7 +472,7 @@ position: "relative", overflow: "hidden",
             <div style={{
               fontSize: 20, color: "#92400e", flexShrink: 0, paddingBottom: 10,
               textShadow: "0 0 10px #f97316",
-            }}><SiggyCatIcon size={24} glowing={false} /></div>
+            }}>⚒</div>
 
             <div style={{
               flex: 1, background: "rgba(20,10,0,0.8)",
@@ -627,44 +507,30 @@ position: "relative", overflow: "hidden",
             </div>
 
             <button
-  onClick={send}
-  disabled={loading || !input.trim()}
-  style={{
-    height: 44, paddingInline: 22,
-    background: loading || !input.trim() 
-      ? "rgba(146,64,14,0.2)" 
-      : "linear-gradient(135deg, #7c1d06, #b94a0a, #e85d04)",
-    border: `1px solid ${loading || !input.trim() ? "rgba(146,64,14,0.2)" : "#ff6a00"}`,
-    borderRadius: 4,
-    color: loading || !input.trim() ? "#78350f" : "#fff7ed",
-    cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-    fontFamily: "'Courier Prime', monospace",
-    fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase",
-    boxShadow: loading || !input.trim() ? "none" : "0 0 6px #e85d04, 0 0 15px rgba(232,93,4,0.3), inset 0 1px 0 rgba(255,160,60,0.15)",
-    transition: "all 0.2s", flexShrink: 0,
-    animation: loading || !input.trim() ? "none" : "igniteFlicker 1.5s ease-in-out infinite",
-    position: "relative", overflow: "hidden",
-  }}
-  onMouseEnter={e => {
-    if (!loading && input.trim()) {
-      e.currentTarget.style.boxShadow = "0 0 12px #ff6a00, 0 0 25px rgba(255,100,0,0.3), inset 0 1px 0 rgba(255,200,80,0.2)";
-      e.currentTarget.style.background = "linear-gradient(135deg, #a02008, #e05a0a, #ff7a1a)";
-      e.currentTarget.style.transform = "scale(1.05)";
-    }
-  }}
-  onMouseLeave={e => {
-    e.currentTarget.style.boxShadow = loading || !input.trim() ? "none" : "0 0 12px #e85d04, 0 0 30px rgba(232,93,4,0.5)";
-    e.currentTarget.style.background = loading || !input.trim() ? "rgba(146,64,14,0.2)" : "linear-gradient(135deg, #7c1d06, #b94a0a, #e85d04)";
-    e.currentTarget.style.transform = "scale(1)";
-  }}
->
-  {loading ? "⚒ FORGING..." : "IGNITE"}
-</button>
+              onClick={send}
+              disabled={loading || !input.trim()}
+              style={{
+                height: 44, paddingInline: 22,
+                background: loading || !input.trim() ? "rgba(146,64,14,0.2)" : "linear-gradient(135deg, #92400e, #78350f)",
+                border: `1px solid ${loading || !input.trim() ? "rgba(146,64,14,0.2)" : "#b45309"}`,
+                borderRadius: 4,
+                color: loading || !input.trim() ? "#78350f" : "#fbbf24",
+                cursor: loading || !input.trim() ? "not-allowed" : "pointer",
+                fontFamily: "'Courier Prime', monospace",
+                fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase",
+                boxShadow: loading || !input.trim() ? "none" : "0 0 20px rgba(249,115,22,0.3)",
+                transition: "all 0.2s", flexShrink: 0,
+              }}
+              onMouseEnter={e => { if (!loading && input.trim()) e.currentTarget.style.boxShadow = "0 0 35px rgba(249,115,22,0.5)"; }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = loading || !input.trim() ? "none" : "0 0 20px rgba(249,115,22,0.3)"; }}
+            >
+              {loading ? "FORGING" : "IGNITE"}
+            </button>
           </div>
 
           <div style={{
             textAlign: "center", marginTop: 12,
-            fontSize: 10.5, color: "rgba(255,140,60,0.9)",
+            fontSize: 10.5, color: "rgba(120,53,15,0.5)",
             fontFamily: "'Courier Prime', monospace", letterSpacing: "0.12em",
           }}>
             SIGGY SOUL FORGE · POWERED BY RITUAL'S OPEN AI INFRASTRUCTURE · gRITUAL
