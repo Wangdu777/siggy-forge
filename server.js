@@ -143,58 +143,9 @@ const DOC_CHUNKS = chunkDocs(RITUAL_DOCS_RAW)
 const EMBED_MODEL = 'text-embedding-004'
 const GEMINI_KEY = () => process.env.GEMINI_API_KEY
 
-async function embedText(text) {
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1/models/${EMBED_MODEL}:embedContent?key=${GEMINI_KEY()}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        content: { parts: [{ text }] }
-      })
-    }
-  )
-  const data = await res.json()
-  if (data.error) throw new Error(`Embedding error: ${data.error.message}`)
-  return data.embedding.values
+async function retrieveContext(query) {
+  return DOC_CHUNKS.join(`"\n\n`")
 }
-
-function cosineSimilarity(a, b) {
-  let dot = 0, magA = 0, magB = 0
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i]
-    magA += a[i] * a[i]
-    magB += b[i] * b[i]
-  }
-  return dot / (Math.sqrt(magA) * Math.sqrt(magB))
-}
-
-// ─── PRE-EMBED ALL CHUNKS AT STARTUP ─────────────────────────────────────────
-let chunkEmbeddings = []
-
-async function buildIndex() {
-  console.log(`🔮 Building RAG index for ${DOC_CHUNKS.length} chunks...`)
-  for (let i = 0; i < DOC_CHUNKS.length; i++) {
-    try {
-      const embedding = await embedText(DOC_CHUNKS[i])
-      chunkEmbeddings.push({ chunk: DOC_CHUNKS[i], embedding })
-      console.log(`  ✅ Embedded chunk ${i + 1}/${DOC_CHUNKS.length}`)
-      // Small delay to avoid rate limiting
-      await new Promise(r => setTimeout(r, 100))
-    } catch (err) {
-      console.error(`  ❌ Failed chunk ${i}: ${err.message}`)
-      chunkEmbeddings.push({ chunk: DOC_CHUNKS[i], embedding: null })
-    }
-  }
-  console.log('🔥 RAG index ready — Siggy is fully powered up!')
-}
-
-// ─── RAG: RETRIEVE TOP K CHUNKS ──────────────────────────────────────────────
-async function retrieveContext(query, topK = 3) {
-  if (chunkEmbeddings.length === 0) {
-    // Fallback: return all chunks if index not built yet
-    return DOC_CHUNKS.slice(0, 3).join('\n\n')
-  }
   const queryEmb = await embedText(query)
   const scored = chunkEmbeddings
     .filter(c => c.embedding !== null)
@@ -265,5 +216,6 @@ app.listen(PORT, () => {
   console.log(`🔥 Siggy Soul Forge live on port ${PORT}`)
   buildIndex().catch(console.error)
 })
+
 
 
