@@ -1,18 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <!-- Dark background -->
-  <rect width="200" height="200" rx="30" fill="#0a0000"/>
+  <!-- Cat body/head - pure black, transparent background -->
+  <path d="M50 110 L70 60 L100 90 L130 60 L150 110 A50 50 0 1 1 50 110" fill="#000000"/>
   
-  <!-- Outer glow -->
-  <rect width="200" height="200" rx="30" fill="none" stroke="#ff4400" stroke-width="4" opacity="0.6"/>
-  
-  <!-- Cat body/head -->
-  <path d="M50 110 L70 60 L100 90 L130 60 L150 110 A50 50 0 1 1 50 110" fill="#111111"/>
-  
-  <!-- Left eye glow -->
-  <ellipse cx="85" cy="120" rx="8" ry="12" fill="#ff0000" opacity="0.3"/>
+  <!-- Left eye - red -->
   <ellipse cx="85" cy="120" rx="6" ry="10" fill="#ff0000"/>
   
-  <!-- Right eye glow -->
-  <ellipse cx="115" cy="120" rx="8" ry="12" fill="#ff0000" opacity="0.3"/>
+  <!-- Right eye - red -->
   <ellipse cx="115" cy="120" rx="6" ry="10" fill="#ff0000"/>
 </svg>
