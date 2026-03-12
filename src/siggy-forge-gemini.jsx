@@ -216,7 +216,7 @@ export default function SiggyForge() {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send() }
   }
 
-  const SPARKS = ["What Is Ritual?", "How Do I Get A Role?", "What Is Infernet?", "Tell Me About The Blessing System"]
+  const SPARKS = ["what is ritual?", "how do i get a role?", "what is infernet?", "tell me about the blessing system"]
 
   return (
     <>
@@ -403,7 +403,7 @@ letterSpacing: "0.12em",
                 borderRadius: 4,
                 color: loading || !input.trim() ? "#78350f" : "#fff7ed",
                 cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-                fontFamily: "'Cinzel Decorative', serif",
+                fontFamily: "'Courier Prime', monospace",
                 fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase",
                 animation: loading || !input.trim() ? "none" : "igniteFlicker 1.5s ease-in-out infinite",
               }}
