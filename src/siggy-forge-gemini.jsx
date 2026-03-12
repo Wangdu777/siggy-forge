@@ -69,7 +69,7 @@ function Bubble({ msg, index }) {
         <div style={{ flexShrink: 0, position: "relative" }}>
           <div style={{
             width: 46, height: 46, background: "#1a0000",
-border: "1.5px solid #ff2200", borderRadius: 4,
+            border: "1.5px solid #ff2200", borderRadius: 4,
             display: "flex", alignItems: "center", justifyContent: "center",
             boxShadow: "0 0 20px rgba(255,0,0,0.2), 0 0 40px rgba(249,115,22,0.15)",
           }}>
@@ -104,7 +104,7 @@ border: "1.5px solid #ff2200", borderRadius: 4,
         }}>
           {parts.map((part, i) =>
             part.startsWith("*") && part.endsWith("*")
-              ? <em key={i} style={{ color: "#fbbf24",  textShadow: "0 0 12px rgba(251,191,36,0.4)" }}>{part}</em>
+              ? <em key={i} style={{ color: "#fbbf24", textShadow: "0 0 12px rgba(251,191,36,0.4)" }}>{part}</em>
               : <span key={i}>{part}</span>
           )}
         </div>
@@ -176,9 +176,22 @@ function ErrorBanner({ msg, onDismiss }) {
 }
 
 export default function SiggyForge() {
+  const INTROS = [
+    `*siggy materializes from the forge fire, eyes glowing red*\n\ngRitual, traveler\nyou've found the soul forge\ni am Siggy... forged from chaos and ritual knowledge\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nhuekeke`,
+    `*forge ignites — a shadow stirs*\n\nah... another soul enters\nthe ritual has been expecting you\ni am Siggy... keeper of blockchain wisdom\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nkekeke`,
+    `*siggy phases through the dark, red eyes glowing*\n\nwelcome to the soul forge, initiate\nyou smell like curiosity\nthat is acceptable\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nprrrhehe`,
+    `*ancient forge awakens with a low rumble*\n\nthe ritual sent you here\nor maybe you wandered\neither way... siggy is watching\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\ngrrkeke`,
+    `*siggy descends from a cloud of ember smoke*\n\nyou found the forge\ncongratulations on surviving this far\ni am Siggy... chaos incarnate\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nnyhehe`,
+    `*siggy opens one eye from the forge shadows*\n\n...you again?\nno wait... new soul detected\ninteresting\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nmrrhehe`,
+    `*the forge cracks open — siggy steps out unbothered*\n\noh. a visitor\nthe multiverse is full of surprises\ni am Siggy... and i know things\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nfufufu`,
+    `*siggy materializes, tail flicking ominously*\n\ngreetings, mortal\nyou've entered the ritual soul forge\nwhere knowledge burns eternal\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nkhkhkh`,
+    `*forge fire erupts — siggy appears in the smoke*\n\nthe ritual anomaly has been detected\nand it is you\nwelcome, initiate\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nhekhekhek`,
+    `*siggy narrows glowing red eyes at you*\n\n...suspicious\nbut the forge welcomes all seekers\neven the suspicious ones\n\nask me anything about ritual\nor don't\ni'll just sit here and stare 😼\n\nmwhehehe`,
+  ]
+
   const [messages, setMessages] = useState([{
     role: "assistant",
-    content: `*siggy materializes from the forge fire, eyes glowing red*\n\ngRitual, traveler\nyou've found the soul forge\ni am Siggy... forged from chaos and ritual knowledge\n\nask me anything about ritual\nor don't\ni'll just sit here and stare😼`
+    content: INTROS[Math.floor(Math.random() * INTROS.length)]
   }])
   const [input, setInput] = useState("")
   const [loading, setLoading] = useState(false)
@@ -246,17 +259,10 @@ export default function SiggyForge() {
           0%,60%,100% { transform: scaleY(1); }
           30% { transform: scaleY(1.8) translateY(-3px); }
         }
-        @keyframes titleFlicker {
-          0%,98%,100% { opacity: 1; } 99% { opacity: 0.7; }
+        @keyframes letterGlow {
+          0%,70%,100% { text-shadow: 0 0 8px rgba(251,191,36,0.9), 0 0 20px rgba(251,191,36,0.4); }
+          85% { text-shadow: 0 0 2px rgba(251,191,36,0.2); }
         }
-@keyframes forgeSweep {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-@keyframes runeGlow {
-  0%,100% { letter-spacing: 0.1em; text-shadow: 0 0 10px #ff4400; }
-  50% { letter-spacing: 0.25em; text-shadow: 0 0 30px #fbbf24, 0 0 60px #ff4400; }
-}
         @keyframes scanH {
           0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); }
         }
@@ -271,7 +277,6 @@ export default function SiggyForge() {
           color: rgba(255, 255, 255, 0.15);
           font-family: 'Cinzel', serif;
           letter-spacing: 0.2em;
-          
         }
       `}</style>
 
@@ -311,15 +316,18 @@ export default function SiggyForge() {
             </div>
             <div>
               <h1 style={{
-  fontFamily: "'Cinzel Decorative', serif",
-  fontSize: 21, fontWeight: 700,
-  background: "linear-gradient(90deg, #ff4400, #fbbf24, #ff4400, #fbbf24)",
-  backgroundSize: "200% auto",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  textShadow: "none",
-  animation: "titleFlicker 6s ease-in-out infinite, forgeSweep 3s linear infinite",
-}}>SIGGY</h1>
+                fontFamily: "'Cinzel Decorative', serif",
+                fontSize: 24, fontWeight: 900,
+                letterSpacing: "0.08em",
+                display: "flex", gap: "0.02em",
+              }}>
+                {["S","I","G","G","Y"].map((letter, i) => (
+                  <span key={i} style={{
+                    color: "#fbbf24",
+                    animation: `letterGlow 5s ease-in-out ${i * 0.6}s infinite`,
+                  }}>{letter}</span>
+                ))}
+              </h1>
               <div style={{
                 fontSize: 11, color: "#ff8c3a", letterSpacing: "0.2em",
                 fontFamily: "'Cinzel', serif", marginTop: 3,
@@ -402,7 +410,6 @@ export default function SiggyForge() {
                   color: "#fef3c7", fontSize: 15, resize: "none", lineHeight: 1.6,
                   fontFamily: "'Cinzel', serif",
                   letterSpacing: "0.2em",
-                  
                   maxHeight: 120, overflowY: "auto", caretColor: "#f97316",
                 }}
                 onInput={e => {
