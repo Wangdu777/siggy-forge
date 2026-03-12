@@ -249,6 +249,14 @@ export default function SiggyForge() {
         @keyframes titleFlicker {
           0%,98%,100% { opacity: 1; } 99% { opacity: 0.7; }
         }
+@keyframes forgeSweep {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes runeGlow {
+  0%,100% { letter-spacing: 0.1em; text-shadow: 0 0 10px #ff4400; }
+  50% { letter-spacing: 0.25em; text-shadow: 0 0 30px #fbbf24, 0 0 60px #ff4400; }
+}
         @keyframes scanH {
           0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); }
         }
@@ -303,11 +311,15 @@ export default function SiggyForge() {
             </div>
             <div>
               <h1 style={{
-                fontFamily: "'Cinzel Decorative', serif",
-                fontSize: 21, fontWeight: 700, color: "#fbbf24",
-                textShadow: "0 0 20px rgba(251,191,36,0.5)",
-                animation: "titleFlicker 6s ease-in-out infinite",
-              }}>SIGGY</h1>
+  fontFamily: "'Cinzel Decorative', serif",
+  fontSize: 21, fontWeight: 700,
+  background: "linear-gradient(90deg, #ff4400, #fbbf24, #ff4400, #fbbf24)",
+  backgroundSize: "200% auto",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  textShadow: "none",
+  animation: "titleFlicker 6s ease-in-out infinite, forgeSweep 3s linear infinite",
+}}>SIGGY</h1>
               <div style={{
                 fontSize: 11, color: "#ff8c3a", letterSpacing: "0.2em",
                 fontFamily: "'Cinzel', serif", marginTop: 3,
