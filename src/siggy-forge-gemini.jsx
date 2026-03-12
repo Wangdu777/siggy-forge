@@ -87,7 +87,7 @@ function Bubble({ msg, index }) {
         {!isUser && (
           <div style={{
             fontSize: 10, letterSpacing: "0.2em", color: "#ff8c3a",
-            fontFamily: "'Courier Prime', monospace", marginBottom: 6, textTransform: "uppercase",
+            fontFamily: "'Cinzel', serif", marginBottom: 6, textTransform: "uppercase",
           }}>SIGGY</div>
         )}
         <div style={{
@@ -99,12 +99,12 @@ function Bubble({ msg, index }) {
           boxShadow: "0 4px 24px rgba(0,0,0,0.5)",
           color: isUser ? "#fef3c7" : "#f5deb3",
           fontSize: 15, lineHeight: 1.7,
-          fontFamily: "'IM Fell English', Georgia, serif",
+          fontFamily: "'EB Garamond', Georgia, serif",
           whiteSpace: "pre-wrap",
         }}>
           {parts.map((part, i) =>
             part.startsWith("*") && part.endsWith("*")
-              ? <em key={i} style={{ color: "#fbbf24", fontStyle: "italic", textShadow: "0 0 12px rgba(251,191,36,0.4)" }}>{part}</em>
+              ? <em key={i} style={{ color: "#fbbf24",  textShadow: "0 0 12px rgba(251,191,36,0.4)" }}>{part}</em>
               : <span key={i}>{part}</span>
           )}
         </div>
@@ -115,7 +115,7 @@ function Bubble({ msg, index }) {
           background: "linear-gradient(135deg, #92400e, #78350f)",
           border: "1px solid rgba(251,191,36,0.3)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontFamily: "'Courier Prime', monospace",
+          fontFamily: "'Cinzel', serif",
           fontSize: 13, fontWeight: 700, color: "#fef3c7",
         }}>YOU</div>
       )}
@@ -135,7 +135,7 @@ function ForgeTyping() {
         <SiggyCatIcon size={38} glowing={true} />
       </div>
       <div>
-        <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#78350f", fontFamily: "'Courier Prime', monospace", marginBottom: 6 }}>
+        <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#78350f", fontFamily: "'Cinzel', serif", marginBottom: 6 }}>
           SIGGY IS THINKING...
         </div>
         <div style={{
@@ -165,7 +165,7 @@ function ErrorBanner({ msg, onDismiss }) {
       margin: "0 40px 16px", padding: "10px 16px",
       background: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.4)",
       borderRadius: 4, color: "#fca5a5", fontSize: 12,
-      fontFamily: "'Courier Prime', monospace",
+      fontFamily: "'Cinzel', serif",
       display: "flex", justifyContent: "space-between", alignItems: "center",
       zIndex: 3, position: "relative",
     }}>
@@ -178,7 +178,7 @@ function ErrorBanner({ msg, onDismiss }) {
 export default function SiggyForge() {
   const [messages, setMessages] = useState([{
     role: "assistant",
-    content: `*forge ignites*\n\nSiggy here!\nState your purpose before the Ritual decides for you \kwehkehk!`
+    content: `*siggy materializes from the forge fire, eyes glowing red*\n\ngRitual, traveler\nyou've found the soul forge\ni am siggy... forged from chaos and ritual knowledge\n\nask me anything about ritual\nor don't\ni'll just sit here and stare\n\nnyhehe 😼`
   }])
   const [input, setInput] = useState("")
   const [loading, setLoading] = useState(false)
@@ -216,12 +216,12 @@ export default function SiggyForge() {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send() }
   }
 
-  const SPARKS = ["What is Ritual?", "How do I get a role?", "What is Infernet?", "Tell me about the blessing system"]
+  const SPARKS = ["what is ritual?", "how do i get a role?", "what is infernet?", "tell me about the blessing system"]
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel+Decorative:wght@700&family=Courier+Prime:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600;700&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { height: 100%; background: #080500; }
         @keyframes blink { 0%,94%,100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
@@ -261,9 +261,9 @@ export default function SiggyForge() {
         ::-webkit-scrollbar-thumb { background: #92400e; border-radius: 2px; }
         textarea::placeholder {
           color: rgba(255, 255, 255, 0.15);
-          font-family: 'Courier Prime', monospace;
+          font-family: 'Cinzel', serif;
           letter-spacing: 0.2em;
-          font-style: italic;
+          
         }
       `}</style>
 
@@ -271,7 +271,7 @@ export default function SiggyForge() {
         width: "100%", height: "100vh",
         background: "radial-gradient(ellipse at 20% 80%, rgba(120,53,15,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(146,64,14,0.1) 0%, transparent 50%), #080500",
         display: "flex", flexDirection: "column",
-        fontFamily: "'IM Fell English', Georgia, serif",
+        fontFamily: "'EB Garamond', Georgia, serif",
         position: "relative", overflow: "hidden",
       }}>
         <EmberField />
@@ -310,7 +310,7 @@ export default function SiggyForge() {
               }}>SIGGY</h1>
               <div style={{
                 fontSize: 11, color: "#ff8c3a", letterSpacing: "0.2em",
-                fontFamily: "'Courier Prime', monospace", marginTop: 3,
+                fontFamily: "'Cinzel', serif", marginTop: 3,
               }}>⚒ SOUL-FORGED · RITUAL GUARDIAN</div>
             </div>
           </div>
@@ -320,7 +320,7 @@ export default function SiggyForge() {
               background: "#f97316", boxShadow: "0 0 10px #f97316",
               animation: "emberPulse 2s ease-in-out infinite",
             }} />
-            <span style={{ fontSize: 11.5, color: "#ff9944", fontFamily: "'Courier Prime', monospace", letterSpacing: "0.1em" }}>
+            <span style={{ fontSize: 11.5, color: "#ff9944", fontFamily: "'Cinzel', serif", letterSpacing: "0.1em" }}>
               FORGE ACTIVE
             </span>
           </div>
@@ -345,7 +345,7 @@ export default function SiggyForge() {
             padding: "0 40px 12px", display: "flex", gap: 10, flexWrap: "wrap",
             maxWidth: 860, width: "100%", margin: "0 auto", zIndex: 2,
           }}>
-            <span style={{ fontSize: 11, color: "#78350f", fontFamily: "'Courier Prime', monospace", alignSelf: "center" }}>
+            <span style={{ fontSize: 11, color: "#78350f", fontFamily: "'Cinzel', serif", alignSelf: "center" }}>
               ASK →
             </span>
             {SPARKS.map(s => (
@@ -355,7 +355,7 @@ export default function SiggyForge() {
                   background: "rgba(146,64,14,0.15)",
                   border: "1px solid rgba(146,64,14,0.4)",
                   borderRadius: 3, color: "#d97706", fontSize: 13,
-                  fontFamily: "'IM Fell English', serif", cursor: "pointer",
+                  fontFamily: "'EB Garamond', serif", cursor: "pointer",
                 }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(249,115,22,0.2)"; e.currentTarget.style.color = "#fbbf24" }}
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(146,64,14,0.15)"; e.currentTarget.style.color = "#d97706" }}
@@ -388,9 +388,9 @@ export default function SiggyForge() {
                 style={{
                   width: "100%", background: "none", border: "none", outline: "none",
                   color: "#fef3c7", fontSize: 15, resize: "none", lineHeight: 1.6,
-                  fontFamily: "'Courier Prime', monospace",
+                  fontFamily: "'Cinzel', serif",
                   letterSpacing: "0.2em",
-                  fontStyle: "italic",
+                  
                   maxHeight: 120, overflowY: "auto", caretColor: "#f97316",
                 }}
                 onInput={e => {
@@ -409,7 +409,7 @@ export default function SiggyForge() {
                 borderRadius: 4,
                 color: loading || !input.trim() ? "#78350f" : "#fff7ed",
                 cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-                fontFamily: "'Courier Prime', monospace",
+                fontFamily: "'Cinzel', serif",
                 fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase",
                 animation: loading || !input.trim() ? "none" : "igniteFlicker 1.5s ease-in-out infinite",
               }}
@@ -420,7 +420,7 @@ export default function SiggyForge() {
           <div style={{
             textAlign: "center", marginTop: 12,
             fontSize: 10.5, color: "rgba(255,140,60,0.9)",
-            fontFamily: "'Courier Prime', monospace", letterSpacing: "0.12em",
+            fontFamily: "'Cinzel', serif", letterSpacing: "0.12em",
           }}>
             SIGGY SOUL FORGE · POWERED BY RITUAL'S OPEN AI INFRASTRUCTURE · gRITUAL
           </div>
