@@ -259,13 +259,15 @@ export default function SiggyForge() {
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: #0d0900; }
         ::-webkit-scrollbar-thumb { background: #92400e; border-radius: 2px; }
+textarea::placeholder { color: rgba(255,255,255,0.3); font-family: 'Courier Prime', monospace; letter-spacing: 0.12em; font-style: italic; }
       `}</style>
 
       <div style={{
         width: "100%", height: "100vh",
         background: "radial-gradient(ellipse at 20% 80%, rgba(120,53,15,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(146,64,14,0.1) 0%, transparent 50%), #080500",
         display: "flex", flexDirection: "column",
-        fontFamily: "'IM Fell English', Georgia, serif",
+        fontFamily: "'Courier Prime', monospace",
+letterSpacing: "0.12em",
         position: "relative", overflow: "hidden",
       }}>
         <EmberField />
