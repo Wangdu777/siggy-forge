@@ -178,7 +178,7 @@ function ErrorBanner({ msg, onDismiss }) {
 export default function SiggyForge() {
   const [messages, setMessages] = useState([{
     role: "assistant",
-    content: `*forge ignites*\n\nsiggy here\nstate your purpose before the ritual decides for you\mwuehehe!😼`
+    content: `*forge ignites*\n\nSiggy here\nstate your purpose before the ritual decides for you \kwehkehk!`
   }])
   const [input, setInput] = useState("")
   const [loading, setLoading] = useState(false)
