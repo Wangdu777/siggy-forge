@@ -44,7 +44,7 @@ function SiggyCatIcon({ size = 40, glowing = false }) {
       display: "block",
       filter: glowing
         ? "drop-shadow(0 0 8px #ff0000) drop-shadow(0 0 18px rgba(255,0,0,0.4))"
-        : "drop-shadow(0 0 4px rgba(255,0,0,0.25))"
+        : "drop-shadow(0 0 8px rgba(255,0,0,0.8))"
     }}>
       <path d="M50 110 L70 60 L100 90 L130 60 L150 110 A50 50 0 1 1 50 110" fill="black"/>
       <ellipse cx="85" cy="120" rx="6" ry="10" fill="#ff0000"
@@ -68,8 +68,8 @@ function Bubble({ msg, index }) {
       {!isUser && (
         <div style={{ flexShrink: 0, position: "relative" }}>
           <div style={{
-            width: 46, height: 46, background: "#000",
-            border: "1.5px solid #1a1a1a", borderRadius: 4,
+            width: 46, height: 46, background: "#1a0000",
+border: "1.5px solid #ff2200", borderRadius: 4,
             display: "flex", alignItems: "center", justifyContent: "center",
             boxShadow: "0 0 20px rgba(255,0,0,0.2), 0 0 40px rgba(249,115,22,0.15)",
           }}>
@@ -178,7 +178,7 @@ function ErrorBanner({ msg, onDismiss }) {
 export default function SiggyForge() {
   const [messages, setMessages] = useState([{
     role: "assistant",
-    content: `*siggy materializes from the forge fire, eyes glowing red*\n\ngRitual, traveler\nyou've found the soul forge\ni am siggy... forged from chaos and ritual knowledge\n\nask me anything about ritual\nor don't\ni'll just sit here and stare\n\nnyhehe 😼`
+    content: `*siggy materializes from the forge fire, eyes glowing red*\n\ngRitual, traveler\nyou've found the soul forge\ni am Siggy... forged from chaos and ritual knowledge\n\nask me anything about ritual\nor don't\ni'll just sit here and stare😼`
   }])
   const [input, setInput] = useState("")
   const [loading, setLoading] = useState(false)
@@ -372,7 +372,7 @@ export default function SiggyForge() {
           position: "relative", zIndex: 2, flexShrink: 0,
         }}>
           <div style={{ maxWidth: 820, margin: "0 auto", display: "flex", gap: 12, alignItems: "flex-end" }}>
-            <SiggyCatIcon size={24} />
+            <SiggyCatIcon size={32} />
             <div style={{
               flex: 1, background: "rgba(20,10,0,0.8)",
               border: "1px solid rgba(146,64,14,0.4)",
