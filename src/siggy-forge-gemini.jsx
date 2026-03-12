@@ -216,7 +216,7 @@ export default function SiggyForge() {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send() }
   }
 
-  const SPARKS = ["what is ritual?", "how do i get a role?", "what is infernet?", "tell me about the blessing system"]
+  const SPARKS = ["What is Ritual?", "How do I get a role?", "What is Infernet?", "Tell me about the blessing system"]
 
   return (
     <>
@@ -259,15 +259,19 @@ export default function SiggyForge() {
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: #0d0900; }
         ::-webkit-scrollbar-thumb { background: #92400e; border-radius: 2px; }
-textarea::placeholder { color: rgba(255,255,255,0.3); font-family: 'Courier Prime', monospace; letter-spacing: 0.12em; font-style: italic; }
+        textarea::placeholder {
+          color: rgba(255, 255, 255, 0.15);
+          font-family: 'Courier Prime', monospace;
+          letter-spacing: 0.2em;
+          font-style: italic;
+        }
       `}</style>
 
       <div style={{
         width: "100%", height: "100vh",
         background: "radial-gradient(ellipse at 20% 80%, rgba(120,53,15,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(146,64,14,0.1) 0%, transparent 50%), #080500",
         display: "flex", flexDirection: "column",
-        fontFamily: "'Courier Prime', monospace",
-letterSpacing: "0.12em",
+        fontFamily: "'IM Fell English', Georgia, serif",
         position: "relative", overflow: "hidden",
       }}>
         <EmberField />
@@ -384,7 +388,9 @@ letterSpacing: "0.12em",
                 style={{
                   width: "100%", background: "none", border: "none", outline: "none",
                   color: "#fef3c7", fontSize: 15, resize: "none", lineHeight: 1.6,
-                  fontFamily: "'IM Fell English', Georgia, serif",
+                  fontFamily: "'Courier Prime', monospace",
+                  letterSpacing: "0.2em",
+                  fontStyle: "italic",
                   maxHeight: 120, overflowY: "auto", caretColor: "#f97316",
                 }}
                 onInput={e => {
